@@ -1,4 +1,4 @@
-#!/bin/bash
+n#!/bin/bash
 
 
 # Must run the script as root or sudo-user. Tells the user this. 
@@ -25,13 +25,13 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 	sudo systemctl enable --now postgresql-12
 
 	# Create new postgresql user "opennms"
-	sudo -i -u postgres psql -c "CREATE USER opennms WITH PASSWORD 'silly';" 
+	sudo -i -u postgres psql -c "CREATE USER opennms WITH PASSWORD 'opennms';" 
 
 	# Create postgres database for user opennms
 	sudo -i -u postgres createdb -O opennms opennms
 
 	# Change password for the postgres sudo user 
-	sudo -i -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'silly';"
+	sudo -i -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
 
 	# Reload postgresql-12
 	sudo systemctl reload postgresql-12
@@ -83,7 +83,7 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 	sudo systemctl reload firewalld
 
 	echo "OpenNMS and its dependencies has been installed successfully." 
-	echo "Please edit the two listed files below with the new credentials for the users created in this script. After, reload opennms and postgresql-12"
+	echo "Please edit the two listed files below with the new credentials for the users created in this script and the hash md5 for local ipv4/6. After, reload opennms and postgresql-12"
 	echo "You can cat this file to read the defaults."
 	echo "1) sudo vi /var/lib/pgsql/12/data/pg_hba.conf 2) -u opennms vi /opt/opennms/etc/opennms-datasources.xml"
 	
