@@ -9,80 +9,80 @@ echo "Do you wish to continue running the script? (y/n): "
 read user_answer
 
 if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
-      # Update the machine
-	    yum -y update
+	# Update the machine
+	yum -y update
 
-	    # Install the postgresql Repository
-	    sudo yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+	# Install the postgresql Repository
+	sudo yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
-	    # Install postgresql-12
-	    sudo yum -y install postgresql12-server postgresql12
+	# Install postgresql-12
+	sudo yum -y install postgresql12-server postgresql12
 
-      # Initialize postgresql-12
-      sudo /usr/pgsql-12/bin/postgresql-12-setup initdb
+	# Initialize postgresql-12
+	sudo /usr/pgsql-12/bin/postgresql-12-setup initdb
       
-      # Enable postgresql-12
-      sudo systemctl enable --now postgresql-12
+	# Enable postgresql-12
+	sudo systemctl enable --now postgresql-12
 
-      # Create new postgresql user "opennms"
-      sudo -i -u postgres createuser -P opennms
+	# Create new postgresql user "opennms"
+	sudo -i -u postgres createuser -P opennms
 
-      # Create postgres database for user opennms
-      sudo -i -u postgres createdb -O opennms opennms
+	# Create postgres database for user opennms
+	sudo -i -u postgres createdb -O opennms opennms
 
-      # Change password for the postgres sudo user 
-      sudo -i -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'silly';"
+	# Change password for the postgres sudo user 
+	sudo -i -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'silly';"
 
-      # Reload postgresql-12
-      sudo systemctl reload postgresql-12
+	# Reload postgresql-12
+	sudo systemctl reload postgresql-12
 
-      # Install opennms repository
-      yum -y install https://yum.opennms.org/repofiles/opennms-repo-stable-rhel7.noarch.rpm
+	# Install opennms repository
+	yum -y install https://yum.opennms.org/repofiles/opennms-repo-stable-rhel7.noarch.rpm
 
-      # Import opennms
-      rpm --import https://yum.opennms.org/OPENNMS-GPG-KEY
+	# Import opennms
+	rpm --import https://yum.opennms.org/OPENNMS-GPG-KEY
 
-      # Install opennms
-      yum -y install opennms
+	# Install opennms
+	yum -y install opennms
 
-      # Install epel-release
-      sudo yum -y install epel-release
+	# Install epel-release
+	sudo yum -y install epel-release
 
-      # Install R-core
-      sudo yum -y install R-core
+	# Install R-core
+	sudo yum -y install R-core
 
-      #Install yum-utils
-      sudo yum -y install yum-utils
+	# Install yum-utils
+	sudo yum -y install yum-utils
 
-      # Disable opennms automatic updates
-      sudo yum-config-manager --disable opennms-repo-stable-*
+	# Disable opennms automatic updates
+	sudo yum-config-manager --disable opennms-repo-stable-*
 
-      # Setting up Java
-	    sudo /opt/opennms/bin/runjava -s
-      sudo /opt/opennms/bin/install -dis
+	# Setting up Java
+	sudo /opt/opennms/bin/runjava -s
+	sudo /opt/opennms/bin/install -dis
 
-      # Enable opennms
-      sudo systemctl enable --now opennms
+	# Enable opennms
+	sudo systemctl enable --now opennms
 
-      # Add masquerade to the firewall
-      sudo firewall-cmd --permanent --add-masquerade
+	# Add masquerade to the firewall
+	sudo firewall-cmd --permanent --add-masquerade
 
-      # Add port 8980/tcp to the firewall 
-      sudo firewall-cmd --permanent --add-port=8980/tcp
+	# Add port 8980/tcp to the firewall 
+	sudo firewall-cmd --permanent --add-port=8980/tcp
 
-      # Add port 162/udp to the firewall 
-      sudo firewall-cmd --permanent --add-port=162/udp
+	# Add port 162/udp to the firewall 
+	sudo firewall-cmd --permanent --add-port=162/udp
 
-      # Add port 10162/udp to the firewall
-      sudo firewall-cmd --permanent --add-port=10162/udp
+	# Add port 10162/udp to the firewall
+	sudo firewall-cmd --permanent --add-port=10162/udp
 
-      # Fowarding port 162/udp to 10162/udp
-      sudo firewall-cmd --permanent --add-forward-port=port=162:proto=udp:toport=10162
+	# Fowarding port 162/udp to 10162/udp
+	sudo firewall-cmd --permanent --add-forward-port=port=162:proto=udp:toport=10162
 
-      # Reload the firewall
-      sudo systemctl reload firewalld
+	# Reload the firewall
+	sudo systemctl reload firewalls
 
-	    echo "OpenNMS and its dependencies has been installed successfully." 
+	echo "OpenNMS and its dependencies has been installed successfully." 
 	
 	
 else
