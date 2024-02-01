@@ -83,13 +83,10 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 	sudo systemctl reload firewalld
 
 	echo "OpenNMS and its dependencies has been installed successfully." 
-	
+	echo "Please edit the two listed files below with the new credentials for the users created in this script. After, reload opennms and postgresql-12"
+	echo "You can cat this file to read the defaults."
+	echo "1) sudo vi /var/lib/pgsql/12/data/pg_hba.conf 2) -u opennms vi /opt/opennms/etc/opennms-datasources.xml"
 	
 else
-    echo "Exiting the script without installing ansible." 
+    echo "Exiting the script without installing OpenNMS." 
 fi
-
-sudo vi /var/lib/pgsql/12/data/pg_hba.conf
-sudo systemctl reload postgresql-12
-
-sudo -u opennms vi /opt/opennms/etc/opennms-datasources.xml
