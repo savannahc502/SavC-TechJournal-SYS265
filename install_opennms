@@ -25,7 +25,7 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 	sudo systemctl enable --now postgresql-12
 
 	# Create new postgresql user "opennms"
-	sudo -i -u postgres createuser -P opennms
+	sudo -i -u postgres psql -c "CREATE USER opennms WITH PASSWORD 'silly';" 
 
 	# Create postgres database for user opennms
 	sudo -i -u postgres createdb -O opennms opennms
