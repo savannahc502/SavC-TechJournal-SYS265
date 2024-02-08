@@ -35,6 +35,8 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 
  	# Editing postgresql-12 file hashing 
 	sed '86 s/ident/md5/' /var/lib/pgsql/12/data/pg_hba.conf
+
+ 	# Editing postgresql-12 file hashing 
  	sed '88 s/ident/md5/' /var/lib/pgsql/12/data/pg_hba.conf
 
 	# Reload postgresql-12
