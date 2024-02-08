@@ -68,6 +68,8 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 
 	# Setting up Java
 	/opt/opennms/bin/runjava -s
+
+ 	# Installing the database
 	/opt/opennms/bin/install -dis
 
 	# Enable opennms
