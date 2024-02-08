@@ -62,7 +62,7 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 	yum-config-manager --disable opennms-repo-stable-*
 
  	# Editing credentials
-  	-u opennms sed /opt/opennms/etc/opennms-datasources.xml
+  	-u opennms sed '26 s/password=""/password="postgres"/' /opt/opennms/etc/opennms-datasources.xml
 
 	# Setting up Java
 	/opt/opennms/bin/runjava -s
@@ -90,9 +90,6 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 	systemctl reload firewalld
 
 	echo "OpenNMS and its dependencies has been installed successfully." 
-	echo "Please edit the two listed files below with the new credentials for the users created in this script and the hash md5 for local ipv4/6. After, reload opennms and postgresql-12"
-	echo "You can cat this file to read the defaults."
-	echo "1) sudo vi /var/lib/pgsql/12/data/pg_hba.conf 2) -u opennms vi /opt/opennms/etc/opennms-datasources.xml"
 	
 else
     echo "Exiting the script without installing OpenNMS." 
