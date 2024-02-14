@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Look into watermarking for troubleshooting 
 
 # Must run the script as root or sudo-user. Tells the user this. 
 echo "Before proceeding, this script that installs OpenNMS must be run using the sudo command or as the root" 
