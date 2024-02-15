@@ -65,7 +65,7 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 	yum-config-manager --disable opennms-repo-stable-*
 
  	# Editing credentials
-  	sudo -u opennms sed '26 s/password=""/password="postgres"/' /opt/opennms/etc/opennms-datasources.xml
+  	sudo -u opennms sed -i '26 s/password=""/password="postgres"/' /opt/opennms/etc/opennms-datasources.xml
 
 	# Setting up Java
 	/opt/opennms/bin/runjava -s
