@@ -68,10 +68,10 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
   	sudo -u opennms sed -i '26 s/password=""/password="postgres"/' /opt/opennms/etc/opennms-datasources.xml
 
 	# Setting up Java
-	/opt/opennms/bin/runjava -s
+	sudo -u opennms /opt/opennms/bin/runjava -s
 
  	# Installing the database
-	/opt/opennms/bin/install -dis
+	sudo -u opennms /opt/opennms/bin/install -dis
 
 	# Enable opennms
 	systemctl enable --now opennms
