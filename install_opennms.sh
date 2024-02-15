@@ -35,10 +35,10 @@ if [ "$user_answer" == "y" ] || [ "$user_answer" == "Y" ]; then
 	sudo -i -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
 
  	# Editing postgresql-12 file hashing 
-	sed '86 s/ident/md5/' /var/lib/pgsql/12/data/pg_hba.conf
+	sed -i '86 s/ident/md5/' /var/lib/pgsql/12/data/pg_hba.conf
 
  	# Editing postgresql-12 file hashing 
- 	sed '88 s/ident/md5/' /var/lib/pgsql/12/data/pg_hba.conf
+ 	sed -i '88 s/ident/md5/' /var/lib/pgsql/12/data/pg_hba.conf
 
 	# Reload postgresql-12
 	systemctl reload postgresql-12
