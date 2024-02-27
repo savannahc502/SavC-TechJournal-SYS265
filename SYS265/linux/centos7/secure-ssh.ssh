@@ -1,0 +1,5 @@
+# secure-ssh.sh
+# author savannahc502
+# adds a public key from the local repo or curled from the remote repo 
+# removes roots ability to ssh in
+echo "ALL OF YOUR CODE GOES HERE"
