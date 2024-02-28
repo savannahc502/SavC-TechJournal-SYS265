@@ -16,7 +16,7 @@ sudo chown -R ${1}:${1} /home/${1}/.ssh
 
 # Blocking root ssh login
 if grep -q "^PermitRootLogin" /etc/ssh/sshd_config; then
-   sudo sed -i 's/^PermitRootLogin.*/PermitRootLogin no' /etc/ssh/sshd_config
+   sudo sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
 else
    echo "PermitRootLogin not found in /etc/ssh/sshd_config"
 fi
