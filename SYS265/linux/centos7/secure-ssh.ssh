@@ -2,4 +2,24 @@
 # author savannahc502
 # adds a public key from the local repo or curled from the remote repo 
 # removes roots ability to ssh in
-echo "ALL OF YOUR CODE GOES HERE"
+
+#!/bin/bash
+
+# Creates a user and adds the public key
+sudo useradd -m -d /home/${1} -s /bin/bash ${1}
+sudo mkdir /home/${1}/.ssh
+cd ~/SavC-TechJournal-SYS265
+sudo cp SYS265/linux/public-keys/id_rsa.pub /home/${1}/.ssh/authorized_keys
+sudo chmod 700 /home/${1}/.ssh
+sudo chmod 600 /home/${1}/.ssh/authorized_keys
+sudo chown -R ${1}:${1} /home/${1}/.ssh
+
+# Blocking root ssh login
+os=$( cat /etc/issue )
+if [[ "$os" == "Ubuntu 20.04.5 LTS"; then
+   echo "No need to edit root login, this is Ubuntu 20.04.5 LTS" 
+else
+sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' ~/etc/ssh/sshd_config
+sed -i 's/PermitRootLogin Yes/PermitRootLogin no/g' ~/etc/ssh/sshd_config
+sed -i 's/#PermitRootLogin yes/PremitRootLogin no/g' ~/etc/ssh/sshd_config
+fi
