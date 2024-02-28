@@ -1,9 +1,9 @@
+#!/bin/bash
+
 # secure-ssh.sh
 # author savannahc502
 # adds a public key from the local repo or curled from the remote repo 
 # removes roots ability to ssh in
-
-#!/bin/bash
 
 # Creates a user and adds the public key
 sudo useradd -m -d /home/${1} -s /bin/bash ${1}
@@ -15,11 +15,11 @@ sudo chmod 600 /home/${1}/.ssh/authorized_keys
 sudo chown -R ${1}:${1} /home/${1}/.ssh
 
 # Blocking root ssh login
-os=$( cat /etc/issue )
-if [[ "$os" == "Ubuntu 20.04.5 LTS"; then
-   echo "No need to edit root login, this is Ubuntu 20.04.5 LTS" 
+if grep -q "^PermitRootLogin" /etc/ssh/sshd_config; then
+   sudo sed -i 's/^PermitRootLogin.*/PermitRootLogin no' /etc/ssh/sshd_config
 else
-sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' ~/etc/ssh/sshd_config
-sed -i 's/PermitRootLogin Yes/PermitRootLogin no/g' ~/etc/ssh/sshd_config
-sed -i 's/#PermitRootLogin yes/PremitRootLogin no/g' ~/etc/ssh/sshd_config
+   echo "PermitRootLogin not found in /etc/ssh/sshd_config"
 fi
+
+# Restart SSH
+sudo systemctl restart sshd.service
