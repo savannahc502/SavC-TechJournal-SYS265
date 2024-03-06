@@ -8,15 +8,16 @@
     - role: mrlesmithjr.postfix
     - role: mrlesmithjr.oracle-java8
     - role: mrlesmithjr.opennms
+    
   tasks:
- - name: add firewall rule
-    firewalld: 
-      port: 10000/tcp
-      permanent: true
-      state: enabled
+   - name: add firewall rule
+     firewalld: 
+       port: 10000/tcp
+       permanent: true
+       state: enabled
 
-  handlers:
-    - name: reload firewall
-      systemd:
-        name: firewalld
-        state: restarted
+   handlers:
+     - name: reload firewall
+        systemd:
+          name: firewalld
+          state: restarted
