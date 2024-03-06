@@ -13,3 +13,9 @@
       port: 10000/tcp
       permanent: true
       state: enabled
+
+  handlers:
+    - name: reload firewall
+      systemd:
+        name: firewalld
+        state: restarted
