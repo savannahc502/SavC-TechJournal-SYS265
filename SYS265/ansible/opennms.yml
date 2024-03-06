@@ -12,7 +12,7 @@
   tasks:
    - name: add firewall rule
      firewalld: 
-       port: 10000/tcp
+       port: 8980/tcp
        permanent: true
        state: enabled
 
