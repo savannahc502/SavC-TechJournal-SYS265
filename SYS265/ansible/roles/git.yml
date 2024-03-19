@@ -1,1 +1,6 @@
-
+---
+- name: GIT Install
+  hosts: git
+  become: true
+  roles:
+  - mauromedda.ansible_role_git
