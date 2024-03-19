@@ -1,0 +1,9 @@
+- name: install windows applications
+  hosts: windows
+  tasks:
+    - name: Install Firefox and 7zip
+      win_chocolately:
+        name:
+        - firefox
+        - 7zip
+        state: present
