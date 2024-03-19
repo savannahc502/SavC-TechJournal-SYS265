@@ -1,0 +1,27 @@
+- name: Wordpress Installation
+  hosts: wordpress
+  become: true
+  vars: 
+    firewalld_enable: true
+  roles: 
+  - acandid.mariadb_apache_wordpress
+
+  tasks: 
+    - name: Add firewall port http
+      firewalld: 
+        port: 80/tcp
+        permanent: true
+        state: enabled
+
+    - name: Add firewall port https
+      firewalld: 
+        port: 443/tcp
+        permanent: true
+        state: enabled
+      notify: Firewall restart
+
+  handlers: 
+    - name: Firewall restart
+      systemd:
+        name: firewalld
+        state: restarted
