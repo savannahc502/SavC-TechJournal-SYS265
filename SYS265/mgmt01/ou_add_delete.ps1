@@ -10,3 +10,4 @@ if ($computer_check -ne $null) {
    Write-Output "Computer '$computer' was moved to '$ou_placement' successfully"
 } else {
    Write-Output "Computer '$computer' was not found." 
+}
