@@ -42,7 +42,7 @@ if ($user_check -ne $null) {
 }
 
 # Deleteing an OU
-$old_ou = Read-Host "Enter the name of the OU you would like to delete (ex. TestOU)"
+$old_ou = Read-Host "Enter the name of the OU you would like to delete (ex. OU=TestOU,DC=savannah,DC=local)"
 
 if (-not (Get-ADOrganizationalUnit -Filter { Name -eq $old_ou})) {
    Remove-ADOrganizationalUnit -Identity $old_ou -Confirm:$false
