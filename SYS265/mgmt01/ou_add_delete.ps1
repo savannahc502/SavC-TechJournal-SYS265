@@ -6,7 +6,7 @@ Write-Output "This script allows the user to move a computer or user objects to 
 Write-Output "For any of the options below, simply hit the enter key if you do not want to complete the action"
 
 # Creating a New OU 
-$new_ou = Read-Host "Enter the name of the OU you would like to add (ex. TestOU):"
+$new_ou = Read-Host "Enter the name of the OU you would like to add (ex. TestOU)"
 
 if (-not (Get-ADOrganizationalUnit -Filter { Name -eq $new_ou})) {
    New-ADOrganizationalUnit -Name $new_ou -ProtectedFromAccidentalDeletion $False
@@ -16,8 +16,8 @@ if (-not (Get-ADOrganizationalUnit -Filter { Name -eq $new_ou})) {
 }
 
 # Moving a Computer Object
-$computer = Read-Host "Enter the name of a computer you would like to move (ex. wks01-savannah):"
-$ou_placement = Read-Host "Enter the OU placement for that computer (ex. OU=Test,DC=savannah,DC=local):"
+$computer = Read-Host "Enter the name of a computer you would like to move (ex. wks01-savannah)"
+$ou_placement = Read-Host "Enter the OU placement for that computer (ex. OU=Test,DC=savannah,DC=local)"
 
 $computer_check = Get-ADComputer -Identity $computer
 
@@ -30,7 +30,7 @@ if ($computer_check -ne $null) {
 
 # Moving a User Object
 $user = Read-Host "Enter the name of a user you would like to move (ex. savannah-ciak):"
-$ou_placement_02 = Read-Host "Enter the OU placement for that computer (ex. OU=Test,DC=savannah,DC=local):"
+$ou_placement_02 = Read-Host "Enter the OU placement for that computer (ex. OU=Test,DC=savannah,DC=local)"
 
 $user_check = Get-ADUser -Identity $user
 
@@ -42,7 +42,7 @@ if ($user_check -ne $null) {
 }
 
 # Deleteing an OU
-$old_ou = Read-Host "Enter the name of the OU you would like to delete (ex. TestOU):"
+$old_ou = Read-Host "Enter the name of the OU you would like to delete (ex. TestOU)"
 
 if (-not (Get-ADOrganizationalUnit -Filter { Name -eq $old_ou})) {
    Remove-ADOrganizationalUnit -Identity $old_ou -Confirm:$false
