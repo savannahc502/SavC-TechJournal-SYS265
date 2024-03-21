@@ -13,6 +13,7 @@ if (-not (Get-ADOrganizationalUnit -Filter { Name -eq $new_ou})) {
    Write-Output "OU '$new_ou' was created successfully"
 } else {
    Write-Output "Failed: OU '$new_ou' already exists."
+}
 
 # Moving a Computer Object
 $computer = Read-Host "Enter the name of a computer you would like to move (ex. wks01-savannah):"
